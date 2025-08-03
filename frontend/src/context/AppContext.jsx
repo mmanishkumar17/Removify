@@ -12,7 +12,7 @@ const AppContextProvider = (props) => {
   const [resultImage, setResultImage] = useState(false);
   const navigate = useNavigate();
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.BACKEND_URL;
 
   const { getToken } = useAuth();
   const { isSignedIn } = useUser();
