@@ -4,6 +4,7 @@
 * {
   font-family: Outfit;
   outline: none;
+  scroll-behavior: smooth;
 }
 
 .slider {
@@ -21,6 +22,24 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .bg-layer {
   background-image: url(/bg_layer.png);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(blue, rgb(150, 150, 255));
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(blue, rgb(150, 150, 255));
 }

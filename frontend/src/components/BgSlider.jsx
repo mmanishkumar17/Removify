@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
+import { motion } from "motion/react";
 
 const BgSlider = () => {
   const [slidePosition, setSlidePosition] = useState(50);
@@ -8,7 +9,13 @@ const BgSlider = () => {
     setSlidePosition(e.target.value);
   };
   return (
-    <div className="pb-10 md:py-20 mx-2">
+    <motion.div
+      className="pb-10 md:py-20 mx-2"
+      initial={{ opacity: 0.2, y: 150 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+    >
       <h1 className="text-center text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-blue-500 to-blue-100 bg-clip-text text-transparent mb-12 sm:mb-20">
         Remove BackGround With High <br /> Quality and Accuracy
       </h1>
@@ -36,7 +43,7 @@ const BgSlider = () => {
           onChange={handleSliderChange}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -20,7 +20,10 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between pt-10 max-sm:pt-8">
       <Link to="/">
-        <img src={assets.logo} alt="" className="w-32 sm:w-44" />
+        <div className="flex items-center gap-2">
+          <img src={assets.logo_icon} alt="" className="w-5 sm:w-10" />
+          <h1 className="text-xl font-bold sm:text-3xl">Removify</h1>
+        </div>
       </Link>
       {isSignedIn ? (
         <div className="flex items-center gap-2 sm:gap-3 ">
