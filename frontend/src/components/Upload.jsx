@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { motion } from "motion/react";
+import { AppContext } from "../context/AppContext";
 
 const Upload = () => {
+  const { removeBg } = useContext(AppContext);
+
   return (
     <motion.div
       className="mt-24 pb-31"

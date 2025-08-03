@@ -2,68 +2,69 @@ import React, { useContext } from "react";
 import { assets, plans } from "../assets/assets";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "@clerk/clerk-react";
-// import { toast } from "react-toastify";
-// import axios from "axios";
-// import { AppContext } from "../context/AppContext";
+import { useAuth } from "@clerk/clerk-react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { AppContext } from "../context/AppContext";
 
 const BuyCredit = () => {
-  // const { backendUrl, loadCreditsData } = useContext(AppContext);
-  // const navigate = useNavigate();
-  // const { getToken } = useAuth();
+  const { backendUrl, loadCreditsData } = useContext(AppContext);
 
-  // const initPay = async (order) => {
-  //   const options = {
-  //     key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-  //     amount: order.amount,
-  //     currency: order.currency,
-  //     name: "Credits Payment",
-  //     description: "Credits Payment",
-  //     order_id: order.id,
-  //     receipt: order.receipt,
-  //     handler: async (response) => {
-  //       const token = await getToken();
+  const navigate = useNavigate();
+  const { getToken } = useAuth();
 
-  //       try {
-  //         const { data } = await axios.post(
-  //           backendUrl + "/api/user/verify-razor",
-  //           response,
-  //           { headers: { token } }
-  //         );
+  const initPay = async (order) => {
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: order.currency,
+      name: "Credits Payment",
+      description: "Credits Payment",
+      order_id: order.id,
+      receipt: order.receipt,
+      handler: async (response) => {
+        const token = await getToken();
 
-  //         if (data.success) {
-  //           loadCreditsData();
-  //           navigate("/");
-  //           toast.success("Credits Added");
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //         toast.error(error.message);
-  //       }
-  //     },
-  //   };
+        try {
+          const { data } = await axios.post(
+            backendUrl + "/api/user/verify-razor",
+            response,
+            { headers: { token } }
+          );
 
-  //   const rzp = new window.Razorpay(options);
-  //   rzp.open();
-  // };
+          if (data.success) {
+            loadCreditsData();
+            navigate("/");
+            toast.success("Credits Added");
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error(error.message);
+        }
+      },
+    };
 
-  // const paymentRazorpay = async (planId) => {
-  //   try {
-  //     const token = await getToken();
-  //     const { data } = await axios.post(
-  //       backendUrl + "/api/user/pay-razor",
-  //       { planId },
-  //       { headers: { token } }
-  //     );
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
 
-  //     if (data.success) {
-  //       initPay(data.order);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error(error.message);
-  //   }
-  // };
+  const paymentRazorpay = async (planId) => {
+    try {
+      const token = await getToken();
+      const { data } = await axios.post(
+        backendUrl + "/api/user/pay-razor",
+        { planId },
+        { headers: { token } }
+      );
+
+      if (data.success) {
+        initPay(data.order);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
 
   return (
     <motion.div
